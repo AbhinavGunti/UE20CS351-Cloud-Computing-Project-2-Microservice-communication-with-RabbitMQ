@@ -29,7 +29,7 @@ Building and deploying a microservices architecture where multiple components co
 ## Flow Diagram 
 
 
-![alt text](https://github.com/AbhinavGunti/UE20CS351-Cloud-Computing-Project-2-Microservice-communication-with-RabbitMQ/blob/main/image.jpg?raw=true)
+![alt text](https://github.com/AbhinavGunti/UE20CS351-Cloud-Computing-Project-2-Microservice-communication-with-RabbitMQ/blob/master/image.jpg?raw=true)
 
 
 ## File Structure 
