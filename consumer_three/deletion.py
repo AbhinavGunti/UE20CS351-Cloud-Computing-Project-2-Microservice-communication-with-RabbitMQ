@@ -13,13 +13,26 @@ db = client['students_db']
 collection = db['students_collection']
 
 # Function to handle messages received from RabbitMQ
+#def delete_record_callback(ch, method, properties, body):
+    #srn = body.decode()
+    #result = collection.delete_one({'SRN': srn})
+    #if result.deleted_count == 1:
+        #print(f"Record with SRN {srn} deleted successfully")
+    #else:
+        #print(f"Unable to delete record with SRN {srn}")
+        
 def delete_record_callback(ch, method, properties, body):
+    # Retrieve all records from database
     srn = body.decode()
-    result = collection.delete_one({'SRN': srn})
-    if result.deleted_count == 1:
-        print(f"Record with SRN {srn} deleted successfully")
-    else:
-        print(f"Unable to delete record with SRN {srn}")
+    records = collection.find({'SRN':srn})
+    
+    # Print records to console
+    for record in records:
+        print(record)
+    result = collection.delete_many({'SRN': srn})
+    if result.deleted_count>0:
+        print(f"{result.deleted_count} records with SRN {srn}")
+
 
 # Start consuming messages from RabbitMQ
 channel.basic_consume(queue='delete_record_queue', on_message_callback=delete_record_callback, auto_ack=True)
